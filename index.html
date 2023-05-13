@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple Calculator</title>
+	<style>
+		.calculator {
+			margin: 0 auto;
+			width: 200px;
+		}
+
+		.display {
+			background-color: #f2f2f2;
+			border: 1px solid #ccc;
+			padding: 5px;
+		}
+
+		.buttons {
+			display: grid;
+			grid-template-columns: repeat(4, 50px);
+			grid-gap: 5px;
+			margin-top: 5px;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			padding: 10px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #3e8e41;
+		}
+
+		.number {
+			grid-column: span 2;
+		}
+
+		.clear {
+			background-color: #f44336;
+		}
+
+		.equal {
+			background-color: #008CBA;
+			grid-row: span 2;
+		}
+
+		.operator {
+			background-color: #008CBA;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="calculator">
+		<div class="display">
+			<input type="text" name="display" id="display" readonly>
+		</div>
+		<div class="buttons">
+			<button class="operator" onclick="addOperator('+')">+</button>
+			<button class="operator" onclick="addOperator('-')">-</button>
+			<button class="operator" onclick="addOperator('*')">*</button>
+			<button class="operator" onclick="addOperator('/')">/</button>
+			<button class="number" onclick="addNumber('7')">7</button>
+			<button class="number" onclick="addNumber('8')">8</button>
+			<button class="number" onclick="addNumber('9')">9</button>
+			<button class="number" onclick="addNumber('4')">4</button>
+			<button class="number" onclick="addNumber('5')">5</button>
+			<button class="number" onclick="addNumber('6')">6</button>
+			<button class="number" onclick="addNumber('1')">1</button>
+			<button class="number" onclick="addNumber('2')">2</button>
+			<button class="number" onclick="addNumber('3')">3</button>
+			<button class="number" onclick="addNumber('0')">0</button>
+			<button class="clear" onclick="clearDisplay()">C</button>
+			<button class="equal" onclick="calculate()">=</button>
+		</div>
+	</div>
+
+	<script>
+		let display = document.getElementById("display");
+		let operand1 = null;
+		let operand2 = null;
+		let operator = null;
+
+		function addNumber(num) {
+			if (display.value === "0" || operator !== null) {
+				display.value = num;
+				operator = null;
+			} else {
+				display.value += num;
+			}
+		}
+
+		function addOperator(op) {
+			operand1 = display.value;
+			operator = op;
+			display.value = "0";
+		}
+
+		function clearDisplay() {
+			display.value = "0";
+			operand1 = null;
+			operand2 = null;
